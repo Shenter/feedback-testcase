@@ -19,6 +19,7 @@ class ManagerSeeder extends Seeder
             'name' => 'Manager',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin'),
+            'is_manager' => true,
         ]);
     }
 }
