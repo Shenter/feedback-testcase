@@ -31,8 +31,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if(Auth::user()->is_manager) {
+            return redirect()->route('feedbacks');
+        }
+        else
+            return redirect('/feedback/add');
     }
 
     /**

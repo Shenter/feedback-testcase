@@ -49,6 +49,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        if(Auth::user()->is_manager) {
+            return redirect()->route('feedbacks');
+        }
+        else
+            return redirect('/feedback/add');
     }
 }

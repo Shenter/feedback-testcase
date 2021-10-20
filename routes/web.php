@@ -22,12 +22,12 @@ use Illuminate\Support\Facades\Route;
 //})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function (){
-    Route::middleware('isManager')->get('/', function ()
-    {
-        echo 1;
+    Route::middleware('isManager')->prefix('manager')->group(function (){
+        Route::get('feedbacks', 'App\Http\Controllers\Manager\ManagerController@show')->name('feedbacks');
     });
+
 });
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
