@@ -46,10 +46,11 @@
                                 @endif
                             </td>
                             <td>
-                                @if($feedback->managed)
+
+                                @if($feedback->is_managed)
                                     Обработан
                                 @else
-
+                                    @livewire('managed-button',['feedbackId'=>$feedback->id])
                                 @endif
                             </td>
 

@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function (){
 
 });
 
-Route::middleware('isUser')->group(function (){
+Route::middleware(['isUser','throttle:postFeedback'])->group(function (){
     Route::get('feedback/add','App\Http\Controllers\User\UserController@add');
     Route::post('feedback/add','App\Http\Controllers\User\UserController@store')->name('feedback.post');
 });
