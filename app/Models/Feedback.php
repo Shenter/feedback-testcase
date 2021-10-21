@@ -11,6 +11,10 @@ class Feedback extends Model
 
     use HasFactory;
     protected $table = 'feedbacks';
+    protected $fillable = ['title', 'message', 'attach', 'user_id'];
+    public $attach;
+    public $message;
+    public $title;
 
 
     /**

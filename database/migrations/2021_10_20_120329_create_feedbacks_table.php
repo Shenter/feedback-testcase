@@ -17,8 +17,10 @@ class CreateFeedbacksTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('title');
             $table->text('message');
             $table->string('attach')->nullable();
+            $table->boolean('is_managed')->default(false);
         });
     }
 

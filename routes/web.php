@@ -27,6 +27,11 @@ Route::middleware('auth')->group(function (){
     });
 
 });
+
+Route::middleware('isUser')->group(function (){
+    Route::get('feedback/add','App\Http\Controllers\User\UserController@add');
+    Route::post('feedback/add','App\Http\Controllers\User\UserController@store')->name('feedback.post');
+});
 Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
