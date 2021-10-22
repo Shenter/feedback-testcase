@@ -16,6 +16,7 @@ class NotifyManagerMail extends Mailable
     /**
      * Create a new message instance.
      *
+     * @param Feedback $feedback
      * @return void
      */
     public function __construct(Feedback $feedback)
@@ -28,9 +29,8 @@ class NotifyManagerMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): NotifyManagerMail
     {
-
           $email = $this->view('email.notify',['feedback'=>$this->feedback]);
           if($this->feedback->attach!=null)
           {

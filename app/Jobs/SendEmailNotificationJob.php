@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Classes\Helpers;
 use App\Mail\NotifyManagerMail;
 use App\Models\Feedback;
 use App\Models\User;
@@ -26,22 +27,17 @@ class SendEmailNotificationJob implements ShouldQueue
     public function __construct(Feedback $feedback)
     {
         $this->feedback = $feedback;
+
     }
 
     /**
-     * Execute the job.
-     *
+     * Send emails to all of managers
+     * @param Helpers $helpers
      * @return void
      */
-    public function handle()
+    public function handle(Helpers $helpers)
     {
-        $recipients = [];
         $email = new NotifyManagerMail($this->feedback);
-        $managers = User::where('is_manager',true)->get();
-        foreach ($managers as $manager)
-        {
-            $recipients []= $manager->email;
-        }
-        Mail::to($recipients)->send($email);
+        Mail::to($helpers->getManagerEmails())->send($email);
     }
 }
