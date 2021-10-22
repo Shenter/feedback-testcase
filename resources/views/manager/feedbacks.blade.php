@@ -52,7 +52,7 @@
                             </td>
                             <td class="py-3 px-6 text-left">
                                 @if ($feedback->attach)
-                                    <a href="{{Storage::url($feedback->attach)}}">Вложение</a>
+                                    <a href="{{Storage::url($feedback->attach)}}" target="_blank">Вложение</a>
                                 @endif
                             </td>
                             <td class="py-3 px-6 text-left">

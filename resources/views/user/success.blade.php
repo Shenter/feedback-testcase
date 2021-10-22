@@ -15,8 +15,8 @@
 
                             Feedback successfully added!<br>
 
-                            @if (RateLimiter::availableIn(sha1(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()))>0)
-                                You can submit feedback in {{\Carbon\Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())))->diffForHumans() }}
+                            @if ($availableIn)
+                                You can submit feedback in {{$humanTime }}
                             @else
                             <a href="{{route('feedback.post')}}">
                                 <button class="p-1 pl-5 pr-5 bg-green-500 text-gray-100 text-lg rounded-lg focus:border-4 border-green-300">Add a new feedback</button>

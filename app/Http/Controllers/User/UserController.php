@@ -61,7 +61,7 @@ class UserController extends Controller
      */
     public function addedSuccessful()
     {
-        return view('user.success');
+        return view('user.success',$this->getRateLimits());
     }
 
 }
