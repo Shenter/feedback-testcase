@@ -22,7 +22,7 @@ class UserController extends Controller
     public function getRateLimits(): array
     {
         return  ['availableIn'=>RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())),
-            'humanTime' =>Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())))->diffForHumans(),];
+            'humanTime' =>Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())))->diffForHumans()];
     }
 
 

@@ -22,13 +22,9 @@
                         @if ($availableIn)
                             You can submit feedback in {{$humanTime }}
                         @else
-
                     </div>
                         <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-
-
                             <div class="text-gray-600">
-
                                 <p class="font-medium text-lg">Форма обратной связи</p>
                                 <p>Поля тема и сообщение обязательны для заполнения</p>
                             </div>
@@ -48,24 +44,15 @@
                                             <label for="file">Выберите файл</label>
                                             <input type="file" id="file" name="file" >
                                         </div>
-
-
-
                                         <div class="md:col-span-5 text-right">
                                             <div class="inline-flex items-end">
                                                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </form>
                         </div>
-
-
-
-
-
                 </div>
                 @endif
             </div>
