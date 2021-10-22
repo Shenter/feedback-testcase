@@ -28,6 +28,12 @@
                                     Загрузил
                                 </th>
                                 <th class="py-3 px-6 text-left">
+                                    E-mail
+                                </th>
+                                <th class="py-3 px-6 text-left">
+                                    Время создания
+                                </th>
+                                <th class="py-3 px-6 text-left">
                                     Обработан
                                 </th>
                             </tr>
@@ -51,6 +57,12 @@
                             </td>
                             <td class="py-3 px-6 text-left">
                                 {{$feedback->user->name}}
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                {{$feedback->user->email}}
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                {{$feedback->created_at}}
                             </td>
                             <td class="py-3 px-6 text-left">
 

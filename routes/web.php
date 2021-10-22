@@ -13,14 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
-
+//Manager routes
 Route::middleware('auth')->group(function (){
     Route::middleware('isManager')->prefix('manager')->group(function (){
         Route::get('feedbacks', 'App\Http\Controllers\Manager\ManagerController@show')->name('feedbacks');
@@ -28,14 +21,14 @@ Route::middleware('auth')->group(function (){
 
 });
 
+//User routes
 Route::middleware(['isUser','auth'])->group(function (){
     Route::get('feedback/add','App\Http\Controllers\User\UserController@add');
     Route::get('feedback/success','App\Http\Controllers\User\UserController@addedSuccessful')->name('addedSuccessful');
-//    Route::middleware(['throttle:userThrottle:1,86400'])->group(function (){
-    Route::middleware(['throttle:userThrottle:1,1'])->group(function (){
+    Route::middleware(['throttle:userThrottle:1,1440'])->group(function (){
         Route::post('feedback/add','App\Http\Controllers\User\UserController@store')->name('feedback.post');
     });
 });
-Route::get('/','App\Http\Controllers\RedirectController')->middleware(['auth'])->name('dashboard');
+Route::get('/','App\Http\Controllers\RedirectController')->middleware(['auth'])->name('index');
 
 require __DIR__.'/auth.php';

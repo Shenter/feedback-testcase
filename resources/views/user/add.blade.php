@@ -19,8 +19,8 @@
                             @endforelse
                         @endif
 
-                        @if (RateLimiter::availableIn(sha1(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()))>0)
-                            You can submit feedback in {{\Carbon\Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())))->diffForHumans() }}
+                        @if ($availableIn)
+                            You can submit feedback in {{$humanTime }}
                         @else
 
                     </div>

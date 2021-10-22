@@ -20,7 +20,7 @@ class Feedback extends Model
      * Пользователь, кому принадлежит отзыв
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }

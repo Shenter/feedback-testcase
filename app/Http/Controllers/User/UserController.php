@@ -4,16 +4,32 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
-use Illuminate\Http\Request;
 use App\Http\Requests\CreateFeedbackRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 
 class UserController extends Controller
 {
     //
+
+
+    /**
+     * Получаем лимиты времени и формат в человеческом виде
+     * @return array
+     */
+    public function getRateLimits(): array
+    {
+        return  ['availableIn'=>RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())),
+            'humanTime' =>Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())))->diffForHumans(),];
+    }
+
+
+
+
     public function add()
     {
-        return view('user.add');
+        return view('user.add', $this->getRateLimits());
     }
 
     /**
@@ -33,11 +49,14 @@ class UserController extends Controller
             $feedback->attach = $path;
             $feedback->save();
         }
-        else {echo 'no file';}
         $feedback->save();
-        return redirect()->route('addedSuccessful');
+        return redirect()->route('addedSuccessful', $this->getRateLimits());
     }
 
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function addedSuccessful()
     {
         return view('user.success');
