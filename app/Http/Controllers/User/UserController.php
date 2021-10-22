@@ -30,6 +30,12 @@ class UserController extends Controller
         }
         else {echo 'no file';}
         $feedback->save();
+        return redirect()->route('addedSuccessful');
+    }
+
+    public function addedSuccessful()
+    {
+        return view('user.success');
     }
 
 }

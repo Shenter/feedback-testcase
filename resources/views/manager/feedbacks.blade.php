@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 @if ($feedback->attach)
-                                    <a href="{{url($feedback->attach)}}">Вложение</a>
+                                    <a href="{{Storage::url($feedback->attach)}}">Вложение</a>
                                 @endif
                             </td>
                             <td>
@@ -59,7 +59,9 @@
                         No results
                     @endforelse
                     </table>
+                    {{$feedbacks->links()}}
                 </div>
+
             </div>
         </div>
     </div>

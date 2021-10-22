@@ -10,7 +10,7 @@ class ManagerController extends Controller
 {
     public function show()
     {
-        $feedbacks = Feedback::with('user')->simplePaginate();
-        return view(  'manager.feedbacks', ['feedbacks'=>$feedbacks]);
+        $feedbacks = Feedback::with('user')->simplePaginate(10);
+        return view('manager.feedbacks', ['feedbacks'=>$feedbacks]);
     }
 }

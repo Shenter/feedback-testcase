@@ -15,10 +15,13 @@
                                 <span style="color: red">
                                 {{$error}}<br>
                             </span>
-                            @endforeach
+                            @empty
+                            @endforelse
                         @endif
 
-
+                        @if (RateLimiter::availableIn(sha1(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()))>0)
+                            You can submit feedback in {{\Carbon\Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier())))->diffForHumans() }}
+                        @else
 
                     </div>
                         <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
@@ -64,6 +67,7 @@
 
 
                 </div>
+                @endif
             </div>
         </div>
     </div>

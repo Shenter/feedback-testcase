@@ -28,11 +28,13 @@ Route::middleware('auth')->group(function (){
 
 });
 
-Route::middleware(['isUser','throttle:postFeedback','auth'])->group(function (){
+Route::middleware(['isUser','auth'])->group(function (){
     Route::get('feedback/add','App\Http\Controllers\User\UserController@add');
-   // Route::middleware(['throttle:postFeedback'])->group(function (){
+    Route::get('feedback/success','App\Http\Controllers\User\UserController@addedSuccessful')->name('addedSuccessful');
+//    Route::middleware(['throttle:userThrottle:1,86400'])->group(function (){
+    Route::middleware(['throttle:userThrottle:1,1'])->group(function (){
         Route::post('feedback/add','App\Http\Controllers\User\UserController@store')->name('feedback.post');
-//    });
+    });
 });
 Route::get('/','App\Http\Controllers\RedirectController')->middleware(['auth'])->name('dashboard');
 
