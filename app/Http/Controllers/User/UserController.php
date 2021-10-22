@@ -16,7 +16,12 @@ class UserController extends Controller
         return view('user.add');
     }
 
-    public function store(CreateFeedbackRequest $request)
+    /**
+     * Saves feedback and redirects to success page
+     * @param CreateFeedbackRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(CreateFeedbackRequest $request): \Illuminate\Http\RedirectResponse
     {
         $feedback = new Feedback([
             'title' => $request->title,

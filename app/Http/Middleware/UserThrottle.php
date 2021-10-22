@@ -20,7 +20,11 @@ class UserThrottle
     {
         return $next($request);
     }
-    protected function resolveRequestSignature($request)
+
+    /**
+     * @return mixed
+     */
+    protected function resolveRequestSignature()
     {
         return Auth::user()->id;
     }
