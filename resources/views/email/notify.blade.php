@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New feedback from user</title>
+    <title>New feedback from user {{$feedback->user->name}}</title>
 </head>
 <body>
 
-<h1>This is test mail from Tutsmake.com</h1>
-<p>Laravel 8 send email example</p>
+<h1>Title: </h1>{{$feedback->title}}
+<p>Feedback text</p>{{$feedback->message}}
 
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Feedback;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,14 +12,15 @@ class NotifyManagerMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $feedback;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Feedback $feedback)
     {
-        //
+        $this->feedback = $feedback;
     }
 
     /**
@@ -28,6 +30,12 @@ class NotifyManagerMail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.notify');
+
+          $email = $this->view('email.notify',['feedback'=>$this->feedback]);
+          if($this->feedback->attach!=null)
+          {
+              $email->attachFromStorage($this->feedback->attach,'public');
+          }
+        return $email;
     }
 }

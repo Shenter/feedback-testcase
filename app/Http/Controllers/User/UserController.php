@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmailNotificationJob;
 use App\Models\Feedback;
 use App\Http\Requests\CreateFeedbackRequest;
 use Carbon\Carbon;
@@ -50,7 +51,8 @@ class UserController extends Controller
             $feedback->save();
         }
         $feedback->save();
-        return redirect()->route('addedSuccessful', $this->getRateLimits());
+        dispatch(new SendEmailNotificationJob($feedback));
+        return redirect()->route('addedSuccessful');
     }
 
 
