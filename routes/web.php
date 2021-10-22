@@ -28,12 +28,12 @@ Route::middleware('auth')->group(function (){
 
 });
 
-Route::middleware(['isUser','throttle:postFeedback'])->group(function (){
+Route::middleware(['isUser','throttle:postFeedback','auth'])->group(function (){
     Route::get('feedback/add','App\Http\Controllers\User\UserController@add');
-    Route::post('feedback/add','App\Http\Controllers\User\UserController@store')->name('feedback.post');
+   // Route::middleware(['throttle:postFeedback'])->group(function (){
+        Route::post('feedback/add','App\Http\Controllers\User\UserController@store')->name('feedback.post');
+//    });
 });
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/','App\Http\Controllers\RedirectController')->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
