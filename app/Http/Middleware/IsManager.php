@@ -18,7 +18,7 @@ class IsManager
     {
         if(!auth()->user()->is_manager)
         {
-            return redirect('/403');//TODO make 403 Page redirect
+            return redirect('/');
         }
         return $next($request);
     }
