@@ -13,6 +13,7 @@ use Tests\TestCase;
 class AppTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      * @test
@@ -41,7 +42,7 @@ class AppTest extends TestCase
         $user = User::factory()->create();
         $response = $this->followingRedirects()
             ->actingAs($user)
-            ->post('feedback/add',['text'=>'test feedback','title'=>'test feedback title','_token'=>csrf_token()]);
+            ->post('feedback/add', ['text' => 'test feedback', 'title' => 'test feedback title', '_token' => csrf_token()]);
         $response->assertSee('successfully added');
     }
 
@@ -49,10 +50,10 @@ class AppTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user)
-            ->post('feedback/add',['text'=>'test feedback','title'=>'test feedback title','_token'=>csrf_token()]);
+            ->post('feedback/add', ['text' => 'test feedback', 'title' => 'test feedback title', '_token' => csrf_token()]);
         $response = $this->followingRedirects()
             ->actingAs($user)
-            ->post('feedback/add',['text'=>'test feedback','title'=>'test feedback title','_token'=>csrf_token()]);
+            ->post('feedback/add', ['text' => 'test feedback', 'title' => 'test feedback title', '_token' => csrf_token()]);
         $response->assertStatus(429);
     }
 
@@ -61,7 +62,7 @@ class AppTest extends TestCase
         $user = User::factory()->create();
         $file = UploadedFile::fake()->image('attach.jpg');
         $this->actingAs($user)
-            ->post('feedback/add',[
+            ->post('feedback/add', [
                 'text' => 'test feedback',
                 'title' => 'test feedback title',
                 '_token' => csrf_token(),
@@ -76,26 +77,27 @@ class AppTest extends TestCase
 
         $user = User::factory()->create();
         $this->actingAs($user)
-            ->post('feedback/add',['text'=>'test feedback','title'=>'test feedback title','_token'=>csrf_token()]);
+            ->post('feedback/add', ['text' => 'test feedback', 'title' => 'test feedback title', '_token' => csrf_token()]);
         $manager = User::factory()->create();
         $manager->is_manager = true;
         $response = $this->actingAs($manager)
             ->get('manager/feedbacks');
         $response->assertSee('test feedback');
     }
+
     public function test_manager_can_download_files()
     {
         $user = User::factory()->create();
         $file = UploadedFile::fake()->image('attach.jpg');
         $this->actingAs($user)
-            ->post('feedback/add',[
+            ->post('feedback/add', [
                 'text' => 'test feedback',
                 'title' => 'test feedback title',
                 '_token' => csrf_token(),
                 'file' => $file
             ]);
-        $response = Http::get(env('APP_URL').'/storage/'.$file->hashName());
-         $this->assertEquals(200, $response->status());
+        $response = Http::get(env('APP_URL') . '/storage/' . $file->hashName());
+        $this->assertEquals(200, $response->status());
         Storage::disk('public')->delete($file->hashName());
     }
 
@@ -105,7 +107,7 @@ class AppTest extends TestCase
         $manager->is_manager = true;
         $response = $this
             ->actingAs($manager)
-            ->post('feedback/add',['text'=>'test feedback','title'=>'test feedback title','_token'=>csrf_token()]);
+            ->post('feedback/add', ['text' => 'test feedback', 'title' => 'test feedback title', '_token' => csrf_token()]);
         $response->assertStatus(302)
             ->assertRedirect('/');
     }
@@ -118,9 +120,6 @@ class AppTest extends TestCase
         $response->assertStatus(302)
             ->assertRedirect('/');
     }
-
-
-
 
 
 }

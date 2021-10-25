@@ -11,6 +11,6 @@ class ManagerController extends Controller
     public function show()
     {
         $feedbacks = Feedback::with('user')->latest()->simplePaginate(10);
-        return view('manager.feedbacks', ['feedbacks'=>$feedbacks]);
+        return view('manager.feedbacks', ['feedbacks' => $feedbacks]);
     }
 }

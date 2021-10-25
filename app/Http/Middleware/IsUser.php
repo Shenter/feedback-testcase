@@ -10,14 +10,13 @@ class IsUser
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!auth()->user() || auth()->user()->is_manager)
-        {
+        if (!auth()->user() || auth()->user()->is_manager) {
             return redirect('/');
         }
         return $next($request);

@@ -21,11 +21,9 @@ class UserController extends Controller
      */
     public function getRateLimits(): array
     {
-        return  ['availableIn'=>RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())),
-            'humanTime' =>Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())))->diffForHumans()];
+        return ['availableIn' => RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())),
+            'humanTime' => Carbon::now()->addSeconds(RateLimiter::availableIn(sha1(Auth::user()->getAuthIdentifier())))->diffForHumans()];
     }
-
-
 
 
     public function add()
@@ -45,7 +43,7 @@ class UserController extends Controller
             'message' => $request->text,
             'user_id' => Auth::user()->id,
         ]);
-        if($request->has('file')) {
+        if ($request->has('file')) {
             $path = $request->file('file')->store('public');
             $feedback->attach = $path;
             $feedback->save();
@@ -61,7 +59,7 @@ class UserController extends Controller
      */
     public function addedSuccessful()
     {
-        return view('user.success',$this->getRateLimits());
+        return view('user.success', $this->getRateLimits());
     }
 
 }
