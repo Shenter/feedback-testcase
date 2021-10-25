@@ -19,6 +19,7 @@ class SendEmailNotificationJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $feedback;
+
     /**
      * Create a new job instance.
      *
